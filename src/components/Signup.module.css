@@ -1,0 +1,59 @@
+
+section {
+  width: 90%;
+  max-width: 25rem;
+  padding: 1rem;
+  text-align: center;
+  margin: 3rem auto;
+  border-radius: 6px;
+  /* box-shadow: 0 1px 4px rgb(0, 0, 0, 0.2); */
+  box-shadow: 0 2px 5px rgb(0, 1, 0);
+  margin-top: 4rem;
+}
+
+.div1 {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.div1 label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: start;
+}
+
+.div1 input {
+  font: inherit;
+  width: 100%;
+  background-color: #0976a9;
+  border-radius: 4px;
+  border: 1px solid rgb(244, 241 241);
+  color: rgb(7, 2, 4);
+  padding: 0.25rem;
+}
+
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: black;
+  background-color: #15596a;
+
+  border-radius: 4px;
+  border: 1px solid burlywood;
+  padding: 0.5rem 2.5rem;
+  margin-top: 10px;
+}
+.actions button:hover {
+  background-color: cadetblue;
+}
+.actions .togggle {
+  cursor: pointer;
+  margin-top: 1.2rem;
+  font: inherit;
+  color: white;
+  background-color: black;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  margin-left: 5px;
+  margin-right: 5px;
+}
