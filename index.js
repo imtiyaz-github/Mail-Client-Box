@@ -1,18 +1,8 @@
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./authentication";
 
-import React from "react";
-import App from "./App";
-import { Provider } from "react-redux";
-import store from "./components/storeRedux";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+const store=configureStore({
+    reducer:{auth:authReducer}
+})
 
-
-const root = createRoot(document.getElementById("root"));
-
-root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
-);
+export default store;
