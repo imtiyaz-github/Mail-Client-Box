@@ -1,5 +1,4 @@
 import classes from "./Welcome.module.css";
-
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "../storeRedux/authReducer";
@@ -8,36 +7,42 @@ import { Button } from "react-bootstrap";
 import { mailSliceAction } from "../storeRedux/emailReducer";
 
 const Welcome = () => {
+
   const dispatch = useDispatch();
+
   const [reRender, setreRender] = useState(true);
+
   const unRead = useSelector((state) => state.mail.unRead);
+
   const myEmail = localStorage.getItem("email").replace(/['@','.']/g, "");
 
   let intervalID;
+
+
   intervalID = setInterval(() => {
     setreRender((prev) => !prev);
   }, 3000);
+
 
   const clearInteravl = () => {
     clearInterval(intervalID);
     console.log(intervalID);
   };
- 
-  
+
 
   const logoutHandler = () => {
     dispatch(authAction.logout());
   };
+  
   let noOfUnread = 0;
+
 
   useEffect(() => {
     const fetchDaata = async () => {
       try {
         const reponse = await fetch(
-          `https://mailbox-client-a7da2-default-rtdb.firebaseio.com/inbox/${myEmail}.json`
-          // `https://my-projects-f3664-default-rtdb.firebaseio.com/inbox/${myEmail}.json`
-        )
-
+          `https://http-maildemo-default-rtdb.firebaseio.com/inbox/${myEmail}.json`
+        );
 
         const mailData = await reponse.json();
         for (let key in mailData) {
@@ -45,7 +50,6 @@ const Welcome = () => {
             noOfUnread++;
           }
         }
-
         dispatch(mailSliceAction.updateUnread(noOfUnread));
       } catch (error) {
         alert(error);
@@ -60,16 +64,21 @@ const Welcome = () => {
       <div className={classes.main}>
         <div className={classes.header}>
           <div className={classes.welcome}>{`Welcome To Mail Box `}</div>
-          <Link to="/send" style={{ textDecoration: "none" }}>
+          <Link to="/send" style={{ textDecoration: "none", color: "black" }}>
             Compose Email
           </Link>
-          <Link to="/inbox" style={{ textDecoration: "none" }}>
+          <Link to="/inbox" style={{ textDecoration: "none", color: "black" }}>
             Inbox {unRead}
           </Link>
-          <Link to="/sentbox" style={{ textDecoration: "none" }}>
+          <Link
+            to="/sentbox"
+            style={{ textDecoration: "none", color: "black" }}
+          >
             Sentbox
           </Link>
-          <Button onClick={logoutHandler}>Logout</Button>
+          <Button className={classes.logout} onClick={logoutHandler}>
+            Logout
+          </Button>
         </div>
       </div>
     </Fragment>

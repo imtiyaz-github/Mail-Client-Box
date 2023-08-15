@@ -5,11 +5,9 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-
 import React, { Fragment, useState } from "react";
 
 const Send = () => {
-
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -31,21 +29,25 @@ const Send = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
+
     const sender = localStorage.getItem("email");
 
     const sender1 = sender.replace(/['@','.']/g, "");
 
-    const receiver = sender.replace(/['@','.']/g, "");
-    
-    console.log("object");
-       if (!email || !editorState.getCurrentContent().getPlainText()) {
+    const receiver = email.replace(/['@','.']/g, "");
+
+    // console.log("object");
+    console.log(sender, receiver);
+
+    if (!email || !editorState.getCurrentContent().getPlainText()) {
       alert("All fields are mandatory");
       return;
     }
+
+    //save email in the sentbox of the sender
+
     fetch(
-      `https://mailbox-client-a7da2-default-rtdb.firebaseio.com/sentbox/${sender1}.json`,
-      //   `https://http-authentication1-default-rtdb.firebaseio.com/sentbox/${sender1}.json`,
-    //   `https://my-projects-f3664-default-rtdb.firebaseio.com/sentbox/${sender1}.json`,
+      `https://http-maildemo-default-rtdb.firebaseio.com/sentbox/${sender1}.json`,
 
       {
         method: "POST",
@@ -62,17 +64,21 @@ const Send = () => {
       if (!res.ok) {
         alert(res.error.message);
       } else {
-        console.log("successfull");
+        console.log(" email sent successfully!");
         console.log(sender1);
         setEditorState("");
+        // setEditorState(editorState.createEmpty());
         setSubject("");
         setEmail("");
       }
     });
+
+    //save email in inbox of the reciver
+
+    // const receiver = sender.replace(/['@','.']/g, "");
+
     fetch(
-        `https://mailbox-client-a7da2-default-rtdb.firebaseio.com/inbox/${receiver}.json`,
-      //   `https://http-authentication1-default-rtdb.firebaseio.com/sentbox/${receiver}.json`,
-    //   `https://my-projects-f3664-default-rtdb.firebaseio.com/sentbox/${receiver}.json`,
+      `https://http-maildemo-default-rtdb.firebaseio.com/inbox/${receiver}.json`,
 
       {
         method: "POST",
@@ -90,7 +96,7 @@ const Send = () => {
       if (!res.ok) {
         alert(res.error.message);
       } else {
-        console.log("successfull");
+        console.log("recieved successfull");
       }
     });
   };

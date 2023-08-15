@@ -1,4 +1,3 @@
-
 import { Fragment } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -11,15 +10,19 @@ import ReadMsg from './components/Email/ReadMsg';
 import Inbox from './components/Email/Inbox';
 import SentBox from './components/Email/SentBox';
 
+
 function App() {
 
-  const isAuth = useSelector(state => state.auth.isAuthenicate)
+
+  const isAuth = useSelector(state => state.auth.isAuthenicate);
+
   console.log(isAuth);
+  
+  
   return (
     <Fragment>
       {isAuth && <Welcome />}
       <Routes>
-
         <Route path='/' element={!isAuth ? <SignUp /> : <Send />}></Route>
         {/* <Route path='/welcome' element={isAuth ? <Welcome /> : <SignUp />} /> */}
         <Route path='/forgotPassword' element={!isAuth ? <ForgotPassword /> : <Welcome />} />
