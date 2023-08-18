@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom";
 import classes from "./ReadMsg.module.css";
 
 const ReadMsg = () => {
-  //get the emaild from the url parameteres
+ 
 
   const { id } = useParams();
 
-  //get the list of emails from the redux store
+
 
   const mails = useSelector((state) => state.mail.mails);
 
-  //get the users email from localstorage and modify it to remove speclial charcter
+
 
   const myEmail = localStorage.getItem("email").replace(/['@','.']/g, "");
 

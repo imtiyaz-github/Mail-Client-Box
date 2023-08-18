@@ -77,7 +77,7 @@ const SignUp = () => {
       console.log("here");
       dispatch(authAction.login());
       console.log("here");
-      redirect("/");
+      redirect("/welcome");
     }
   };
   return (
